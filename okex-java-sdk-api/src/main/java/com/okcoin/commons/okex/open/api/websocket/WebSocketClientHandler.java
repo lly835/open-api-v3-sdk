@@ -48,6 +48,10 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
             int closeCode = closeFrame.statusCode();
             this.listener.onWebsocketClose(webSocketClient, closeCode);
         }
+        else if (frame instanceof TextWebSocketFrame) {
+            TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
+            this.listener.onTextMessage(webSocketClient, textFrame.text());
+        }
         else if (frame instanceof BinaryWebSocketFrame) {
             //这里处理收到的逻辑
             String msgStr = decode(msg);

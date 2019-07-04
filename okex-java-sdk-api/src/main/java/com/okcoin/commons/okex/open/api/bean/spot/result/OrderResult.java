@@ -1,5 +1,6 @@
 package com.okcoin.commons.okex.open.api.bean.spot.result;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -56,5 +57,10 @@ public class OrderResult {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

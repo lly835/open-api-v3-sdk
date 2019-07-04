@@ -1,5 +1,7 @@
 package com.okcoin.commons.okex.open.api.websocket;
 
+import java.util.Map;
+
 public interface WebSocket {
 
     void connect();
@@ -15,4 +17,10 @@ public interface WebSocket {
     void sendPing();
 
     boolean checkSum(String data);
+
+    /**
+     * 针对zb
+     * @param map
+     */
+    void addChannel(Map map);
 }

@@ -29,6 +29,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -90,6 +91,13 @@ public class WebSocketClient implements WebSocket {
                             p.addLast(handler);
                             p.addLast(new IdleStateHandler(0, 30, 0));
 
+                        }
+
+                        @Override
+                        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                            super.exceptionCaught(ctx, cause);
+                            Channel channel = ctx.channel();
+                            if(channel.isActive())ctx.close();
                         }
                     });
 
@@ -243,5 +251,8 @@ public class WebSocketClient implements WebSocket {
         this.send("ping");
     }
 
-
+    public void addChannel(Map map) {
+        map.put("event", "addChannel");
+        this.send(JSON.toJSONString(map));
+    }
 }

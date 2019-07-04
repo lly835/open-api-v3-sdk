@@ -52,6 +52,8 @@ public class OrderInfo {
      */
     private String filled_notional;
 
+    private String state;
+
     public Long getOrder_id() {
         return this.order_id;
     }
@@ -145,5 +147,13 @@ public class OrderInfo {
 
     public void setFilled_notional(final String filled_notional) {
         this.filled_notional = filled_notional;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
